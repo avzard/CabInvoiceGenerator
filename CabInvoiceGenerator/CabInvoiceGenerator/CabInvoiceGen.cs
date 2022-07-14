@@ -12,7 +12,7 @@ namespace CabInvoiceGenerator
 {
     public class CabInvoiceGen
     {
-        // If Variable is read only values can be only changed in constructor.
+        
         public readonly int MINIMUM_FARE;
         public readonly int COST_PER_KM;
         public readonly int COST_PER_MINUTE;
@@ -28,7 +28,7 @@ namespace CabInvoiceGenerator
             }
         }
 
-        // UC1 - Method to calculate fare for single ride
+        
         public double CalculateFare(int time, double distance)
         {
             double totalFare;
@@ -49,8 +49,8 @@ namespace CabInvoiceGenerator
             }
 
         }
-        // UC2 - Method to calculate agreegate fare for multiple rides
-        public double CalculateAgreegateFare(Ride[] rides)
+        
+        public InvoiceSummary CalculateAgreegateFare(Ride[] rides)
         {
             double totalFare = 0;
             if (rides.Length == 0)
@@ -59,8 +59,8 @@ namespace CabInvoiceGenerator
             {
                 totalFare += CalculateFare(ride.time, ride.distance);
             }
-            double agreegateFare = Math.Max(totalFare, MINIMUM_FARE);
-            return agreegateFare;
+            totalFare = Math.Max(totalFare, MINIMUM_FARE);
+            return new InvoiceSummary(rides.Length, totalFare);
         }
     }
 }
