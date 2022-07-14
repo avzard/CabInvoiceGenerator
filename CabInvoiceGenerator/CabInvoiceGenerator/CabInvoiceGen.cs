@@ -6,19 +6,18 @@ using System.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CabInvoiceGenerator
 {
     public class CabInvoiceGen
     {
-        
+        // If Variable is read only values can be only changed in constructor.
         public readonly int MINIMUM_FARE;
         public readonly int COST_PER_KM;
         public readonly int COST_PER_MINUTE;
 
-        
+        // Parameterized constructor
         public CabInvoiceGen(RideType type)
         {
             if (type.Equals(RideType.NORMAL))
@@ -29,7 +28,7 @@ namespace CabInvoiceGenerator
             }
         }
 
-        
+        // UC1 - Method to calculate fare for single ride
         public double CalculateFare(int time, double distance)
         {
             double totalFare;
@@ -48,6 +47,20 @@ namespace CabInvoiceGenerator
             {
                 throw ex;
             }
+
+        }
+        // UC2 - Method to calculate agreegate fare for multiple rides
+        public double CalculateAgreegateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            if (rides.Length == 0)
+                throw new CabInvoiceGeneratorException(CabInvoiceGeneratorException.ExceptionType.NULL_RIDES, "No Rides Found");
+            foreach (Ride ride in rides)
+            {
+                totalFare += CalculateFare(ride.time, ride.distance);
+            }
+            double agreegateFare = Math.Max(totalFare, MINIMUM_FARE);
+            return agreegateFare;
         }
     }
 }
