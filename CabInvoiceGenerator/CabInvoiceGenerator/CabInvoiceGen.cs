@@ -12,7 +12,7 @@ namespace CabInvoiceGenerator
 {
     public class CabInvoiceGen
     {
-        
+        // If Variable is read only values can be only changed in constructor.
         public readonly int MINIMUM_FARE;
         public readonly int COST_PER_KM;
         public readonly int COST_PER_MINUTE;
@@ -28,7 +28,7 @@ namespace CabInvoiceGenerator
             }
         }
 
-        
+        // UC1 - Method to calculate fare for single ride
         public double CalculateFare(int time, double distance)
         {
             double totalFare;
@@ -49,7 +49,22 @@ namespace CabInvoiceGenerator
             }
 
         }
-        
+        // UC2 - Method to calculate agreegate fare for multiple rides
+        /*
+        public double CalculateAgreegateFare(Ride[] rides)
+        {
+            double totalFare = 0;
+            if (rides.Length == 0)
+                throw new CabInvoiceGeneratorException(CabInvoiceGeneratorException.ExceptionType.NULL_RIDES, "No Rides Found");
+            foreach (Ride ride in rides)
+            {
+                totalFare += CalculateFare(ride.time, ride.distance);
+            }
+            double agreegateFare = Math.Max(totalFare, MINIMUM_FARE);
+            return agreegateFare;
+        }
+        */
+        // UC3
         public InvoiceSummary CalculateAgreegateFare(Ride[] rides)
         {
             double totalFare = 0;
@@ -64,3 +79,18 @@ namespace CabInvoiceGenerator
         }
     }
 }
+
+//UC-4
+//Invoice Services
+//Given User ID, The Invoice Services Get The List Of Rides From The Rides Repository,And Return The Invoice.
+
+//CabInvoiceGenTestCase
+//  Tests in group: 5
+
+//  Total Duration: 26 ms
+
+//Outcomes
+//   5 Passed
+
+
+
