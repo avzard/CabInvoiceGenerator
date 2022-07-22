@@ -17,10 +17,7 @@ namespace CabInvoiceGenerator
             this.totalFare = totalFare;
             this.averageFare = totalFare / numOfRides;
         }
-        //Oue Expexted Object and method returning is same but failing in test case.
-        //Because Assert.AreEqual Implemented Only For Variables Not For Objects
-        //in order to work on AreEqual method in UnitTest1 Class
-        //we Have To Override Equals Method
+        
         public override bool Equals(Object obj)
         {
             if (obj == null)
